@@ -49,10 +49,3 @@ input[type="radio"] {
     appearance: none;
     margin: 0;
 } 
-
-.answer-idle {
-}
-
-.answer-pressed {
-    background-color: greenyellow;
-}
