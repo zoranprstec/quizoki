@@ -1,3 +1,58 @@
 body {
     margin: none;
 }
+
+:root {
+    --form-control-color: rebeccapurple;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.answers-row {
+    display: flex;
+    gap: 14px;
+}
+
+.form-control, .form-control-selected, .form-control-correct, .form-control-incorrect {
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    line-height: 1.1;
+    gap: 0.5em;
+    outline: 1px solid rgb(161, 159, 159);
+    border-radius: 18px;
+    padding: 8px;
+    text-align: center;
+    align-self: center;
+}
+
+.form-control-selected {
+    background-color: lightslategrey;
+    outline: none;
+}
+
+.form-control-correct {
+    background-color: rgb(110, 201, 110);
+    outline: none;
+}
+
+.form-control-incorrect {
+    background-color: rgba(177, 63, 63, 0.658);
+    outline: none;
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+} 
+
+.answer-idle {
+}
+
+.answer-pressed {
+    background-color: greenyellow;
+}
