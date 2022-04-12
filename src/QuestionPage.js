@@ -9,9 +9,7 @@ export default function QuestionPage(props) {
     const [points, setPoints] = useState(0)
     const {category, difficulty} = props.quizData
 
-    console.log([category, difficulty])
     const fetchURL = `https://opentdb.com/api.php?amount=5&${category && `category=${category}&`}${difficulty && `difficulty=${difficulty}&`}type=multiple`
-    console.log(fetchURL)
 
     useEffect(() => {
         fetch(fetchURL)
@@ -37,7 +35,7 @@ export default function QuestionPage(props) {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return <h4 className="loading-text">Loading...</h4>;
     } else {
         const questions = data.map(element => (
             <QuestionCard 
@@ -53,8 +51,9 @@ export default function QuestionPage(props) {
         return (
             <main>
                 {questions}
-                <button onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
-                {submitted && <h3>You scored {points}/{questions.length}</h3>}
+                {submitted && <h3 className="score-text">You scored {points}/{questions.length}</h3>}
+                <button className="submit-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
+                <br />
             </main>
         )
     }

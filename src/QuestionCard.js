@@ -68,11 +68,11 @@ export default function QuestionCard(props) {
 
     return (
         <section>
-            <h2>{decodedQuestion}</h2>
+            <h2 className="question">{decodedQuestion}</h2>
             <div className="answers-row">
                 {showAnswers}
             </div>
-            <hr />
+            <hr className="line"/>
         </section>
     )
 }
