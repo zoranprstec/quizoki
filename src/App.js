@@ -1,5 +1,6 @@
 import StartPage from "./StartPage"
 import QuestionPage from "./QuestionPage"
+import RegistrationPage from "./RegistrationPage"
 import {useState, useEffect} from "react"
 
 export default function App () {
@@ -11,8 +12,11 @@ export default function App () {
 
     return (
         <div>
-            {startPageActive && <StartPage setStartPage={setStartPageActive} quizData={quizData} setQuizData={setQuizData} />}
-            {!startPageActive && <QuestionPage setStartPage={setStartPageActive} quizData={quizData} />}
+            <RegistrationPage />
+            {/* {startPageActive ? 
+                <StartPage setStartPage={setStartPageActive} quizData={quizData} setQuizData={setQuizData} /> :
+                <QuestionPage setStartPage={setStartPageActive} quizData={quizData} />
+            } */}
         </div>
     )
 }

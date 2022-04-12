@@ -43,8 +43,6 @@ export default function StartPage(props) {
                     <option value="hard">Hard</option>
                 </select>
             </div>
-            {/* <br />
-            <br /> */}
             <button className="start-quiz-button" onClick={() => props.setStartPage(prevPage => !prevPage)}>Start the damn quiz!</button>
         </div>
     )
