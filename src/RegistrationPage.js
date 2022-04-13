@@ -20,7 +20,6 @@ export default function RegistrationPage() {
         })
     }
 
-    // bitch
     useEffect(() => {
         const request = {
             method: "POST",
