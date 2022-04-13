@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function RegistrationPage() {
     const [formData, setFormData] = useState({
@@ -19,6 +19,18 @@ export default function RegistrationPage() {
             }
         })
     }
+
+    // bitch
+    useEffect(() => {
+        const request = {
+            method: "POST",
+            headers: {"Content-type": "application.json"},
+            body: JSON.stringify({userName: "POST request userName"})
+        }
+        fetch("https://localhost:44396/register")
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }, [])
 
     function sendDataToMP() {
         console.log("data sent")
