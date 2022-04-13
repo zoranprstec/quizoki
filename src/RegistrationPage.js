@@ -8,8 +8,6 @@ export default function RegistrationPage() {
         confirmPassword: ""
     })
 
-    console.log(formData)
-
     function updateForm(event) {
         const {value, name} = event.target
         setFormData(prevData => {
@@ -19,61 +17,65 @@ export default function RegistrationPage() {
             }
         })
     }
-
-    useEffect(() => {
+    
+    function sendDataToMP() {
         const request = {
             method: "POST",
-            headers: {"Content-type": "application.json"},
-            body: JSON.stringify({userName: "POST request userName"})
+            // headers: {"Content-type": "application.json"},
+            body: JSON.stringify({
+                UserName: formData.userName,
+                Email: formData.email,
+                Password: formData.password ,
+                ConfirmPassword: formData.confirmPassword
+            })
         }
-        fetch("https://localhost:44396/register")
+
+        fetch("https://localhost:44396", request)
             .then(response => response.json())
             .then(data => console.log(data))
-    }, [])
-
-    function sendDataToMP() {
-        console.log("data sent")
     }
 
     return (
         <div className="registration">
-            <input
-                type="text"
-                placeholder="User Name"
-                name="userName"
-                value={formData.userName}
-                onChange={updateForm}
-            ></input>
-            <br />
-            <input
-                type="email"
-                placeholder="E-mail"
-                name="email"
-                value={formData.email}
-                onChange={updateForm}
-            ></input>
-            <br />
-            <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={formData.password}
-                onChange={updateForm}
-            ></input>
-            <br />
-            <input
-                type="password"
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={updateForm}
-            ></input>
-            <br />
-            <input
-                type="submit"
-                onClick={sendDataToMP}
-            ></input>
-            <br />
+            <form>
+                <input
+                    type="text"
+                    placeholder="User Name"
+                    name="userName"
+                    value={formData.userName}
+                    onChange={updateForm}
+                ></input>
+                <br />
+                <input
+                    type="email"
+                    placeholder="E-mail"
+                    name="email"
+                    value={formData.email}
+                    onChange={updateForm}
+                ></input>
+                <br />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={updateForm}
+                ></input>
+                <br />
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={updateForm}
+                ></input>
+                <br />
+                <input
+                    type="submit"
+                    onClick={sendDataToMP}
+                ></input>
+                <br />
+            </form>
         </div>
     )
 }
