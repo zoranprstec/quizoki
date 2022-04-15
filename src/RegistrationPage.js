@@ -21,7 +21,8 @@ export default function RegistrationPage() {
     function sendDataToMP() {
         const request = {
             method: "POST",
-            // headers: {"Content-type": "application.json"},
+            headers: {"Content-Type": "application/json"},
+            mode: "cors",
             body: JSON.stringify({
                 UserName: formData.userName,
                 Email: formData.email,
@@ -30,14 +31,14 @@ export default function RegistrationPage() {
             })
         }
 
-        fetch("https://localhost:44396", request)
+        fetch("https://localhost:44396/register", request)
             .then(response => response.json())
             .then(data => console.log(data))
     }
 
     return (
         <div className="registration">
-            <form>
+            <form action="register" method="POST">
                 <input
                     type="text"
                     placeholder="User Name"
