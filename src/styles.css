@@ -20,6 +20,17 @@ body {
     box-sizing: border-box;
 }
 
+/* -- Logo Page -- */
+
+img {
+    max-width: 192px;
+}
+
+.logo-page {
+    grid-template-columns: auto, auto;
+    justify-content: center;
+}
+
 /* -- START PAGE -- */
 
 .main-page {
@@ -158,6 +169,8 @@ input[type="radio"] {
 .score-text {
     text-align: center;
 }
+
+/* -- MISC -- */
 
 .loading-text {
     text-align: center;
