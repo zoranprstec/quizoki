@@ -8,6 +8,13 @@ export default function RegistrationPage() {
         password: "",
         confirmPassword: ""
     })
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        if (data) {
+
+        }
+    }, [data])
 
     function updateForm(event) {
         const {value, name} = event.target
@@ -36,8 +43,7 @@ export default function RegistrationPage() {
     function sendDataToMP(event) {
         const request = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            mode: "no-cors",
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({
                 UserName: formData.userName,
                 Email: formData.email,
@@ -46,18 +52,17 @@ export default function RegistrationPage() {
             })
         }
         
-        fetch("http://localhost:44396", request)
+        fetch("https://localhost:44396/api/Auth/register", request)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => setData(data))
             .catch(error => console.log(error))
 
-        console.log("submitted")
         event.preventDefault()
     }
 
     return (
         <div className="registration">
-            <form onSubmit={sendDataToMP} /*action="44396" method="POST"*/ >
+            <form onSubmit={sendDataToMP} >
                 <input
                     type="text"
                     placeholder="User Name"

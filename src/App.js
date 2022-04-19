@@ -1,6 +1,7 @@
 import StartPage from "./StartPage"
 import QuestionPage from "./QuestionPage"
 import RegistrationPage from "./RegistrationPage"
+import LoginPage from "./LoginPage"
 import LogoPage from "./LogoPage"
 import {useState, useEffect} from "react"
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
@@ -18,6 +19,7 @@ export default function App () {
                 <Route path="/" element={<Outlet />} />
                     <Route index element={<LogoPage />} />
                     <Route path="register" element={<RegistrationPage />} />
+                    <Route path="login" element={<LoginPage />} />
                     <Route path="startpage" element={<StartPage />} />
             </Routes>
         </BrowserRouter>
