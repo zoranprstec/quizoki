@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export default function RegistrationPage() {
     const [formData, setFormData] = useState({
@@ -17,12 +18,26 @@ export default function RegistrationPage() {
             }
         })
     }
+
+    // const requestOptions = { 
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //         UserName: "bitch"
+    //     })
+    // }
     
-    function sendDataToMP() {
+    // useEffect(() => {
+    //     fetch("https://reqres.in/api/posts", requestOptions)
+    //         .then(response => response.json())
+    //         .then((data) => console.log(data))
+    // }, [])
+    
+    function sendDataToMP(event) {
         const request = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            mode: "no-cors",
             body: JSON.stringify({
                 UserName: formData.userName,
                 Email: formData.email,
@@ -30,15 +45,19 @@ export default function RegistrationPage() {
                 ConfirmPassword: formData.confirmPassword
             })
         }
-
-        fetch("https://localhost:44396/register", request)
+        
+        fetch("http://localhost:44396", request)
             .then(response => response.json())
             .then(data => console.log(data))
+            .catch(error => console.log(error))
+
+        console.log("submitted")
+        event.preventDefault()
     }
 
     return (
         <div className="registration">
-            <form action="register" method="POST">
+            <form onSubmit={sendDataToMP} /*action="44396" method="POST"*/ >
                 <input
                     type="text"
                     placeholder="User Name"
@@ -73,7 +92,6 @@ export default function RegistrationPage() {
                 <br />
                 <input
                     type="submit"
-                    onClick={sendDataToMP}
                 ></input>
                 <br />
             </form>
