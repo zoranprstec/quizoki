@@ -9,6 +9,11 @@ export default function RegistrationPage() {
         confirmPassword: ""
     })
     const [data, setData] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(true)
+    const [error, setError] = useState(null)
+    const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (data) {
@@ -25,20 +30,6 @@ export default function RegistrationPage() {
             }
         })
     }
-
-    // const requestOptions = { 
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //         UserName: "bitch"
-    //     })
-    // }
-    
-    // useEffect(() => {
-    //     fetch("https://reqres.in/api/posts", requestOptions)
-    //         .then(response => response.json())
-    //         .then((data) => console.log(data))
-    // }, [])
     
     function sendDataToMP(event) {
         const request = {
@@ -51,13 +42,28 @@ export default function RegistrationPage() {
                 ConfirmPassword: formData.confirmPassword
             })
         }
+
+        setIsLoaded(false)
         
         fetch("https://localhost:44396/api/Auth/register", request)
             .then(response => response.json())
-            .then(data => setData(data))
-            .catch(error => console.log(error))
+            .then(data => {
+                setIsLoaded(true)
+                setData(data)
+                setLoadedSuccessfully(true)
+            },
+            error => {
+                setIsLoaded(true)
+                setError(error)
+                setLoadedSuccessfully(false)
+                alert(error.message)
+            })
 
         event.preventDefault()
+
+        if (loadedSuccessfully && data.successfull) {
+            navigate("/startpage", { replace: false })
+        }
     }
 
     return (
@@ -100,6 +106,7 @@ export default function RegistrationPage() {
                 ></input>
                 <br />
             </form>
+            {!isLoaded && <div>Loading...</div>}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import QuestionPage from "./QuestionPage"
 import RegistrationPage from "./RegistrationPage"
 import LoginPage from "./LoginPage"
 import LogoPage from "./LogoPage"
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 
 export default function App () {
@@ -20,7 +20,8 @@ export default function App () {
                     <Route index element={<LogoPage />} />
                     <Route path="register" element={<RegistrationPage />} />
                     <Route path="login" element={<LoginPage />} />
-                    <Route path="startpage" element={<StartPage />} />
+                    <Route path="startpage" element={<StartPage quizData={quizData} setQuizData={setQuizData} />} />
+                    <Route path="questionpage" element={<QuestionPage quizData={quizData} setQuizData={setQuizData} />} />
             </Routes>
         </BrowserRouter>
     )

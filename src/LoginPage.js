@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginPage() {
     const [formData, setFormData] = useState({
@@ -7,6 +8,10 @@ export default function LoginPage() {
     })
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(true)
+    const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
+
+    const navigate = useNavigate()
 
     function handleChange(event) {
         const {value, name} = event.target
@@ -27,16 +32,28 @@ export default function LoginPage() {
                 Password: formData.password
             })
         }
+
+        setIsLoaded(false)
         
         fetch("https://localhost:44396/api/Auth/login", request)
             .then(response => response.json())
-            .then(data => (
-                setData(data),
-                (error) => {
-                    setError(error);
-                }
-            ))
+            .then(data => {
+                setIsLoaded(true)
+                setData(data)
+                setLoadedSuccessfully(true)
+            },
+            (error) => {
+                setIsLoaded(true)
+                setError(error)
+                setLoadedSuccessfully(false)
+                alert(error.message)
+            })
+
         event.preventDefault()
+
+        if (loadedSuccessfully && data.successfull) {
+            navigate("/startpage", { replace: false })
+        }
     }
 
     return (
@@ -62,7 +79,7 @@ export default function LoginPage() {
                     type="submit"
                 ></input>
                 <br />
-                {error && <div>Error: {error.message}</div>}
+                {!isLoaded && <div>Loading...</div>}
             </form>
         </div>
     )

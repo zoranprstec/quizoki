@@ -27,8 +27,22 @@ img {
 }
 
 .logo-page {
-    grid-template-columns: auto, auto;
-    justify-content: center;
+    margin-top: auto;
+    text-align: center;
+}
+
+.register-button, .login-button {
+    font-family: 'Anek Tamil', sans-serif;
+    height: 2rem;
+    width: 5rem;
+    border-radius: 1rem;
+}
+
+.register-button {
+    margin-right: 2em;
+}
+
+.login-button {
 }
 
 /* -- START PAGE -- */

@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function StartPage(props) {
+    const navigate = useNavigate()
+
     function handleDropdown(event) {
         const {value, name} = event.target
         props.setQuizData(prevData => {
@@ -43,7 +46,7 @@ export default function StartPage(props) {
                     <option value="hard">Hard</option>
                 </select>
             </div>
-            <button className="start-quiz-button" onClick={() => props.setStartPage(prevPage => !prevPage)}>Start the damn quiz!</button>
+            <button className="start-quiz-button" onClick={() => navigate("/questionpage", { replace: false })}>Start the damn quiz!</button>
         </div>
     )
 }
