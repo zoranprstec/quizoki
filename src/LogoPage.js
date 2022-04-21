@@ -9,7 +9,7 @@ export default function LogoPage() {
     }
 
     return (
-        <div className="logo-page">
+        <div className="vertical-center">
             <img src="logo192.png" />
             <h1>Logo Page</h1>
             <button className="register-button" id="register" onClick={handleButton}>Register</button>

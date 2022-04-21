@@ -67,45 +67,57 @@ export default function RegistrationPage() {
     }
 
     return (
-        <div className="registration">
-            <form onSubmit={sendDataToMP} >
-                <input
-                    type="text"
-                    placeholder="User Name"
-                    name="userName"
-                    value={formData.userName}
-                    onChange={updateForm}
-                ></input>
-                <br />
-                <input
-                    type="email"
-                    placeholder="E-mail"
-                    name="email"
-                    value={formData.email}
-                    onChange={updateForm}
-                ></input>
-                <br />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={updateForm}
-                ></input>
-                <br />
-                <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={updateForm}
-                ></input>
-                <br />
-                <input
-                    type="submit"
-                ></input>
-                <br />
-            </form>
+        <div>
+            <div className="registration">
+                <form onSubmit={sendDataToMP} className="form-container" >
+                    <input
+                        className="form-input"
+                        type="text"
+                        placeholder="User Name"
+                        name="userName"
+                        value={formData.userName}
+                        onChange={updateForm}
+                    ></input>
+                    <br />
+                    <input
+                        className="form-input"
+                        type="email"
+                        placeholder="E-mail"
+                        name="email"
+                        value={formData.email}
+                        onChange={updateForm}
+                    ></input>
+                    <br />
+                    <input
+                        className="form-input"
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        value={formData.password}
+                        onChange={updateForm}
+                    ></input>
+                    <br />
+                    <input
+                        className="form-input"
+                        type="password"
+                        placeholder="Confirm Password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={updateForm}
+                    ></input>
+                    <br />
+                    <input
+                        type="submit"
+                        className="register-button"
+                    ></input>
+                    <br />
+                </form>
+                <hr className="vertical-line" />
+                <div className="welcome-text-container">
+                    <h2>Welcome!</h2>
+                    <p>Please register so you can start answering some questions!</p>
+                </div>
+            </div>
             {!isLoaded && <div>Loading...</div>}
         </div>
     )

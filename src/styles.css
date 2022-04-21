@@ -6,7 +6,7 @@ body {
     font-family: 'Anek Tamil', sans-serif;
     margin: none;
     background: rgb(34,193,195);
-    background: linear-gradient(146deg, rgba(34,193,195,1) 0%, rgba(253,187,45,0.3253676470588235) 100%);
+    background: linear-gradient(146deg, rgb(34, 192, 195) 0%, rgb(255, 224, 156) 100%);
     background-attachment: fixed;
 }
 
@@ -22,30 +22,35 @@ body {
 
 /* -- Logo Page -- */
 
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+}
+
 img {
     max-width: 192px;
 }
 
-.logo-page {
-    margin-top: auto;
-    text-align: center;
-}
-
 .register-button, .login-button {
     font-family: 'Anek Tamil', sans-serif;
+    font-weight: 500;
     height: 2rem;
     width: 5rem;
     border-radius: 1rem;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0.082);
+    cursor: pointer;
 }
 
-.register-button {
-    margin-right: 2em;
+.register-button + .login-button {
+    margin-left: 2em;
 }
 
-.login-button {
-}
-
-/* -- START PAGE -- */
+/* -- Start Page -- */
 
 .main-page {
     display: flex;
@@ -100,7 +105,7 @@ img {
     border: 2px solid rgba(0, 0, 0, 0.281);
 }
 
-/* -- QUESTIONS PAGE -- */
+/* -- Questions Page -- */
 
 main {
     margin-top: 3rem;
@@ -182,6 +187,44 @@ input[type="radio"] {
 
 .score-text {
     text-align: center;
+}
+
+/* -- Registration Page -- */
+
+.registration {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-40%);
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: center;
+}
+
+.form-container {
+    text-align: center;
+}
+
+.form-input {
+    text-indent: 1rem;
+    height: 1.5rem;
+    border-radius: 1rem;
+    background-color: rgba(240, 248, 255, 0.384);
+    border: none;
+    margin-bottom: 0.75em;
+}
+
+br + .register-button {
+    margin-top: 0.8rem;
+}
+
+.welcome-text-container {
+    width: 20rem;
+}
+
+.vertical-line {
+    margin: 0 2em 0 2em;
 }
 
 /* -- MISC -- */
