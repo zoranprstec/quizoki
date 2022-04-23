@@ -15,12 +15,6 @@ export default function RegistrationPage() {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (data) {
-
-        }
-    }, [data])
-
     function updateForm(event) {
         const {value, name} = event.target
         setFormData(prevData => {
@@ -108,7 +102,7 @@ export default function RegistrationPage() {
                     <br />
                     <input
                         type="submit"
-                        className="register-button"
+                        className="register-button longer-button"
                     ></input>
                     <br />
                 </form>
