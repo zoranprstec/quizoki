@@ -13,6 +13,18 @@ export default function App () {
         difficulty: ""
     })
 
+    const startpage = startPageActive ? 
+    <StartPage 
+        quizData={quizData} 
+        setQuizData={setQuizData} 
+        startPageActive={startPageActive} 
+        setStartPageActive={setStartPageActive} 
+    /> :
+    <QuestionPage 
+        setStartPage={setStartPageActive} 
+        quizData={quizData} 
+    />
+
     return (
         <BrowserRouter>
             <Routes>
@@ -20,8 +32,8 @@ export default function App () {
                     <Route index element={<LogoPage />} />
                     <Route path="register" element={<RegistrationPage />} />
                     <Route path="login" element={<LoginPage />} />
-                    <Route path="startpage" element={<StartPage quizData={quizData} setQuizData={setQuizData} />} />
-                    <Route path="questionpage" element={<QuestionPage quizData={quizData} setQuizData={setQuizData} />} />
+                    <Route path="startpage" element={startpage} />
+                    {/* <Route path="questionpage" element={<QuestionPage quizData={quizData} setQuizData={setQuizData} />} /> */}
             </Routes>
         </BrowserRouter>
     )

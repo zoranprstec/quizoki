@@ -16,8 +16,8 @@ export default function StartPage(props) {
 
     return (
         <div className="main-page">
-            <h1 className="title">QuiZoki</h1>
-            <h3 className="subtitle">Ya, dis here is all me, brace yerselfs</h3>
+            <h1 className="title">quiZoMania</h1>
+            <h3 className="subtitle">Ya, dis here is all us, brace yerselfs</h3>
             <div className="dropdown-container">
                 <select
                     value={props.quizData.category}
@@ -46,7 +46,7 @@ export default function StartPage(props) {
                     <option value="hard">Hard</option>
                 </select>
             </div>
-            <button className="start-quiz-button" onClick={() => navigate("/questionpage", { replace: false })}>Start the damn quiz!</button>
+            <button className="styled-button longer-button" onClick={() => props.setStartPageActive(false)}>Start the damn quiz!</button>
         </div>
     )
 }

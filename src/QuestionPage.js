@@ -52,7 +52,7 @@ export default function QuestionPage(props) {
             <main>
                 {questions}
                 {submitted && <h3 className="score-text">You scored {points}/{questions.length}</h3>}
-                <button className="submit-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
+                <button className="styled-button horizontal-align longer-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
                 <br />
             </main>
         )

@@ -36,7 +36,7 @@ img {
     max-width: 192px;
 }
 
-.register-button, .login-button {
+.styled-button {
     font-family: 'Anek Tamil', sans-serif;
     font-weight: 500;
     font-size: large;
@@ -49,11 +49,11 @@ img {
     transition: background-color, 0.2s;
 }
 
-.register-button:hover, .login-button:hover {
+.styled-button:hover {
     background-color: rgba(255, 255, 255, 0.555);
 }
 
-.register-button + .login-button {
+.styled-button + .styled-button {
     margin-left: 2em;
 }
 
@@ -178,7 +178,7 @@ input[type="radio"] {
     margin: 0;
 } 
 
-.submit-button {
+/* .submit-button {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -190,7 +190,7 @@ input[type="radio"] {
     border: none;
     border-radius: 20px;
     background: linear-gradient(146deg, rgba(34, 192, 195, 0.288) 0%, rgba(253, 187, 45, 0.37) 100%);
-}
+} */
 
 .score-text {
     text-align: center;
@@ -238,10 +238,17 @@ br + .register-button {
 }
 
 .longer-button {
-    width: auto + 1rem;
+    width: -moz-fit-content;
+    width: fit-content;
 }
 
 /* -- MISC -- */
+
+.horizontal-align {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .loading-text {
     text-align: center;

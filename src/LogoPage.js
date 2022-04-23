@@ -12,8 +12,8 @@ export default function LogoPage() {
         <div className="vertical-center">
             <img src="logo192.png" />
             <h1>Logo Page</h1>
-            <button className="register-button" id="register" onClick={handleButton}>Register</button>
-            <button className="login-button" id="login" onClick={handleButton}>Login</button>
+            <button className="styled-button" id="register" onClick={handleButton}>Register</button>
+            <button className="styled-button" id="login" onClick={handleButton}>Login</button>
         </div>
     )
 }

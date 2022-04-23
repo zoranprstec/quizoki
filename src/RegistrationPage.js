@@ -102,7 +102,7 @@ export default function RegistrationPage() {
                     <br />
                     <input
                         type="submit"
-                        className="register-button longer-button"
+                        className="styled-button longer-button"
                     ></input>
                     <br />
                 </form>
