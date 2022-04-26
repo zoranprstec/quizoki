@@ -8,7 +8,9 @@ export default function RegistrationPage() {
         password: "",
         confirmPassword: ""
     })
-    const [data, setData] = useState(null)
+    const [localData, setLocalData] = useState({
+        successfull: ""
+    })
     const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState(null)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
@@ -37,13 +39,15 @@ export default function RegistrationPage() {
             })
         }
 
+        console.log("submit function")
+
         setIsLoaded(false)
         
         fetch("https://localhost:44396/api/Auth/register", request)
             .then(response => response.json())
             .then(data => {
                 setIsLoaded(true)
-                setData(data)
+                setLocalData(data)                                  // ovo se zapiše u state tek prilikom početka sljedećeg rendera
                 setLoadedSuccessfully(true)
             },
             error => {
@@ -52,13 +56,15 @@ export default function RegistrationPage() {
                 setLoadedSuccessfully(false)
                 alert(error.message)
             })
-
+        
         event.preventDefault()
-
-        if (loadedSuccessfully && data.successfull) {
+    }
+    
+    useEffect(() => {
+        if (localData.successfull) {
             navigate("/startpage", { replace: false })
         }
-    }
+    }, [loadedSuccessfully])
 
     return (
         <div>

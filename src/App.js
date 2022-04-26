@@ -3,14 +3,14 @@ import QuestionPage from "./QuestionPage"
 import RegistrationPage from "./RegistrationPage"
 import LoginPage from "./LoginPage"
 import LogoPage from "./LogoPage"
+import AddQuestionPage from "./AddQuestionPage"
 import { useState, useEffect } from "react"
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 
 export default function App () {
     const [startPageActive, setStartPageActive] = useState(true)
     const [quizData, setQuizData] = useState({
-        category: "",
-        difficulty: ""
+        category: ""
     })
 
     const startpage = startPageActive ? 
@@ -33,6 +33,7 @@ export default function App () {
                     <Route path="register" element={<RegistrationPage />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="startpage" element={startpage} />
+                    <Route path="addquestion" element={<AddQuestionPage />} />
                     {/* <Route path="questionpage" element={<QuestionPage quizData={quizData} setQuizData={setQuizData} />} /> */}
             </Routes>
         </BrowserRouter>

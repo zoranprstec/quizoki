@@ -14,6 +14,11 @@ export default function StartPage(props) {
         })
     }
 
+    function handleButton(event) {
+        const {id} = event.target
+        navigate(`/${id}`, { replace: false })
+    }
+
     return (
         <div className="main-page">
             <h1 className="title">quiZoMania</h1>
@@ -26,13 +31,11 @@ export default function StartPage(props) {
                     className="dropdown"
                 >
                     <option value="">Any Category</option>
-                    <option value="9">General Knowledge</option>
-                    <option value="10">Entertainemnt: Books</option>
-                    <option value="11">Entertainemnt: Film</option>
-                    <option value="14">Entertainemnt: Television</option>
-                    <option value="15">Entertainemnt: Video Games</option>
-                    <option value="16">Entertainemnt: Board Games</option>
-                    <option value="17">Science and Nature</option>
+                    <option value="0">Movies</option>
+                    <option value="1">TV Shows</option>
+                    <option value="2">Books</option>
+                    <option value="3">History</option>
+                    <option value="4">Science</option>
                 </select>
                 <select
                     value={props.quizData.difficulty}
@@ -47,6 +50,7 @@ export default function StartPage(props) {
                 </select>
             </div>
             <button className="styled-button longer-button" onClick={() => props.setStartPageActive(false)}>Start the damn quiz!</button>
+            <button className="styled-button longer-button" id="addquestion" onClick={handleButton}>Add question</button>
         </div>
     )
 }
