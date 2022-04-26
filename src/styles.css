@@ -253,3 +253,21 @@ br + .register-button {
 .loading-text {
     text-align: center;
 }
+
+.fade-out {
+    animation: fadeIn 4s forwards;
+}
+
+.popup-arrow {
+    visibility: hidden;
+}
+
+@-webkit-keyframes fadeIn {
+    50% {opacity: 1;} 
+    100% {opacity: 0;}
+  }
+
+@keyframes fadeIn {
+    50% {opacity: 1;} 
+    100% {opacity: 0;}
+}

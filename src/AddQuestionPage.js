@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import Popup from "reactjs-popup"
 
 export default function AddQuestionPage() {
     const [localData, setLocalData] = useState({
-        successfull: ""
+        successfull: false
     })
     const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState(null)
@@ -16,9 +17,13 @@ export default function AddQuestionPage() {
         correctAnswer: "",
         category: 0
     })
-    
-    console.log(formData)
+    const [open, setOpen] = useState(false)
 
+    const ref = useRef()
+    const openTooltip = () => {
+        ref.current.open()
+    }
+ 
     function handleUpdate(event) {
         const {name, value} = event.target
         setFormData(prevData => ({
@@ -26,6 +31,8 @@ export default function AddQuestionPage() {
             [name]: value
         }))
     }
+
+    console.log("loaded succesfully " + loadedSuccessfully)
 
     function handleSubmit(event) {
         const request = {
@@ -43,12 +50,15 @@ export default function AddQuestionPage() {
         }
 
         setIsLoaded(false)
-        
+
         fetch("https://localhost:44396/api/Question/AddQuestion", request)
-            .then(response => response.json())
-            .then(data => {
+            .then(response => {
+                if (!response.ok) {
+                    throw Error("Server responded with 'fuck you' code")
+                }
+            })
+            .then(() => {
                 setIsLoaded(true)
-                setLocalData(data)
                 setLoadedSuccessfully(true)
             },
             error => {
@@ -63,7 +73,11 @@ export default function AddQuestionPage() {
     }
     
     useEffect(() => {
-        localData.successfull && alert("Sent succesfully")
+        if(loadedSuccessfully) {
+            console.log("Sent succesfully")
+            setLoadedSuccessfully(false)
+            openTooltip()
+        }
     }, [loadedSuccessfully])
 
     return (
@@ -74,6 +88,7 @@ export default function AddQuestionPage() {
                     name="category"
                     onChange={handleUpdate}
                     className="dropdown"
+                    required
                 >
                     <option value={null}>-- Choose Category --</option>
                     <option value={0}>Movies</option>
@@ -90,6 +105,7 @@ export default function AddQuestionPage() {
                     name="title"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
                 <input
@@ -99,6 +115,7 @@ export default function AddQuestionPage() {
                     name="wrongAnswer1"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
                 <input
@@ -108,6 +125,7 @@ export default function AddQuestionPage() {
                     name="wrongAnswer2"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
                 <input
@@ -117,6 +135,7 @@ export default function AddQuestionPage() {
                     name="wrongAnswer3"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
                 <input
@@ -126,6 +145,7 @@ export default function AddQuestionPage() {
                     name="wrongAnswer4"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
                 <input
@@ -135,11 +155,43 @@ export default function AddQuestionPage() {
                     name="correctAnswer"
                     onChange={handleUpdate}
                     className="form-input"
+                    required
                 ></input>
                 <br></br>
-                <input className="styled-button longer-button" type="submit"></input>
+                <Popup 
+                    ref={ref}
+                    close={open}
+                    trigger={<input className="styled-button longer-button" type="submit"></input>}
+                    position="bottom center"
+                >
+                    <div className="fade-out">popup content</div>
+                </Popup>
             </form>
             {!isLoaded && <div>Loading...</div>}
+            {error && <div>{error.message}</div>}
         </div>
     )
 }
+
+
+//  commented because backup
+// fetch("https://localhost:44396/api/Question/AddQuestion", request)
+// .then(response => {
+//     if (!response.ok) {
+//         throw Error("Server responded with 'fuck you' code")
+//     }
+//     console.log(response.json())
+// })
+// .then(data => {
+//     console.log(data)
+//     setIsLoaded(true)
+//     setLocalData(data)
+//     setLoadedSuccessfully(true)
+// },
+// error => {
+//     setIsLoaded(true)
+//     setError(error)
+//     setLoadedSuccessfully(false)
+//     alert(error.message)
+//     console.log(error)
+// })
