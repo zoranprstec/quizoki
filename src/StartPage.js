@@ -14,11 +14,6 @@ export default function StartPage(props) {
         })
     }
 
-    function handleButton(event) {
-        const {id} = event.target
-        navigate(`/${id}`, { replace: false })
-    }
-
     return (
         <div className="main-page">
             <h1 className="title">quiZoMania</h1>
@@ -50,7 +45,6 @@ export default function StartPage(props) {
                 </select>
             </div>
             <button className="styled-button longer-button" onClick={() => props.setStartPageActive(false)}>Start the damn quiz!</button>
-            <button className="styled-button longer-button" id="addquestion" onClick={handleButton}>Add question</button>
         </div>
     )
 }

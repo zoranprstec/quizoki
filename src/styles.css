@@ -21,7 +21,18 @@ body {
     box-sizing: border-box;
 }
 
-/* -- Logo Page -- */
+/* -- Navbar -- ----------------------------------------------*/
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav--link {
+    margin: 1rem;
+}
+
+/* -- Logo Page -- ----------------------------------------------*/
 
 .vertical-center {
     margin: 0;
@@ -57,7 +68,7 @@ img {
     margin-left: 2em;
 }
 
-/* -- Start Page -- */
+/* -- Start Page -- ----------------------------------------------*/
 
 .main-page {
     display: flex;
@@ -88,31 +99,35 @@ img {
 .dropdown {
     font-family: 'Anek Tamil', sans-serif;
     font-weight: 500;
-    margin: 0.4rem;
-    height: 2rem;
-    text-indent: 10px;
+    font-size: medium;
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+    margin-bottom: 0.75em;
     width: 13rem;
+    height: 2rem;
+
     border: none;
-    border-radius: 10px;
-    background-color: aliceblue;
+    border-radius: 1rem;
+    text-indent: 1rem;
+    background-color: rgba(240, 248, 255, 0.6);
 }
 
 .start-quiz-button {
     height: 2.5rem;
     width: 10rem;
-    cursor: pointer;
     font-family: 'Anek Tamil', sans-serif;
     font-weight: 500;
     border: none;
     border-radius: 20px;
     background: linear-gradient(146deg, rgba(34, 192, 195, 0.288) 0%, rgba(253, 187, 45, 0.37) 100%);
+    cursor: pointer;
 }
 
 .start-quiz-button:active {
     border: 2px solid rgba(0, 0, 0, 0.281);
 }
 
-/* -- Questions Page -- */
+/* -- Questions Page -- ----------------------------------------------*/
 
 main {
     margin-top: 3rem;
@@ -196,7 +211,7 @@ input[type="radio"] {
     text-align: center;
 }
 
-/* -- Registration Page -- */
+/* -- Registration Page -- ----------------------------------------------*/
 
 .registration {
     position: absolute;
@@ -223,6 +238,10 @@ input[type="radio"] {
     border: none;
     margin-bottom: 0.75em;
 }
+/* 
+.form-input + .dropdown {
+    margin-bottom: 0.75em;
+} */
 
 br + .register-button {
     margin-top: 0.8rem;
@@ -242,7 +261,7 @@ br + .register-button {
     width: fit-content;
 }
 
-/* -- MISC -- */
+/* -- MISC -- ----------------------------------------------*/
 
 .horizontal-align {
     display: block;
@@ -254,12 +273,16 @@ br + .register-button {
     text-align: center;
 }
 
-.fade-out {
+.timer-popup {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem;
+    background-color: rgba(240, 248, 255, 0.5);
+    width: 16rem;
+    margin-top: 1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     animation: fadeIn 4s forwards;
-}
-
-.popup-arrow {
-    visibility: hidden;
 }
 
 @-webkit-keyframes fadeIn {
@@ -270,4 +293,8 @@ br + .register-button {
 @keyframes fadeIn {
     50% {opacity: 1;} 
     100% {opacity: 0;}
+}
+
+.standard-width {
+    width: 18rem;
 }

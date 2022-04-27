@@ -10,31 +10,33 @@ export default function QuestionPage(props) {
 
     const navigate = useNavigate()
 
-    setIsLoaded(false)
+    // setIsLoaded(false)
 
-    for (let i = 0; i < 5; i++) {
-        const request = {
-            method: "GET",
-            headers: { Accept: "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify({
-                category: props.quizData.category
-            })
-        }
+//     for (let i = 0; i < 5; i++) {
+//         const request = {
+//             method: "GET",
+//             headers: { Accept: "application/json", "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//                 category: props.quizData.category
+//             })
+//         }
 
 
-        fetch("https://localhost:44396/api/Question/RandomQuestion")
-            .then(response => response.json())
-            .then(data => {
-                setData(data => ([{}]))
-                setLoadedSuccessfully(true)
-            },
-            error => {
-                setIsLoaded(true)
-                setError(error)
-                setLoadedSuccessfully(false)
-                alert(error.message)
-            })
-    }
+//         fetch("https://localhost:44396/api/Question/RandomQuestion")
+//             .then(response => response.json())
+//             .then(data => {
+//                 setData(data => ([{}]))
+//                 setLoadedSuccessfully(true)
+//             },
+//             error => {
+//                 setIsLoaded(true)
+//                 setError(error)
+//                 setLoadedSuccessfully(false)
+//                 alert(error.message)
+//             })
+//     }
+// }
+
 }
 
 // const [error, setError] = useState(null);
@@ -91,4 +93,3 @@ export default function QuestionPage(props) {
 //             <br />
 //         </main>
 //     )
-// }

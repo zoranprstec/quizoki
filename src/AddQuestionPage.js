@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import Popup from "reactjs-popup"
+import { useStopwatch } from "react-timer-hook"
 
 export default function AddQuestionPage() {
     const [localData, setLocalData] = useState({
@@ -17,12 +17,22 @@ export default function AddQuestionPage() {
         correctAnswer: "",
         category: 0
     })
-    const [open, setOpen] = useState(false)
+    const {
+        seconds,
+        isRunning,
+        start,
+        pause,
+        reset,
+      } = useStopwatch({ autoStart: false });
 
-    const ref = useRef()
-    const openTooltip = () => {
-        ref.current.open()
+    if (seconds >= 4) {
+        reset(null, false)
     }
+
+    // function showPopup() {
+    //     reset()
+    //     isRunning ? pause() : start()
+    // }
  
     function handleUpdate(event) {
         const {name, value} = event.target
@@ -65,7 +75,6 @@ export default function AddQuestionPage() {
                 setIsLoaded(true)
                 setError(error)
                 setLoadedSuccessfully(false)
-                alert(error.message)
                 console.log(error)
             })
 
@@ -76,7 +85,8 @@ export default function AddQuestionPage() {
         if(loadedSuccessfully) {
             console.log("Sent succesfully")
             setLoadedSuccessfully(false)
-            openTooltip()
+            reset()
+            isRunning ? pause() : start()
         }
     }, [loadedSuccessfully])
 
@@ -87,7 +97,7 @@ export default function AddQuestionPage() {
                     value={formData.category}
                     name="category"
                     onChange={handleUpdate}
-                    className="dropdown"
+                    className="dropdown standard-width"
                     required
                 >
                     <option value={null}>-- Choose Category --</option>
@@ -158,17 +168,12 @@ export default function AddQuestionPage() {
                     required
                 ></input>
                 <br></br>
-                <Popup 
-                    ref={ref}
-                    close={open}
-                    trigger={<input className="styled-button longer-button" type="submit"></input>}
-                    position="bottom center"
-                >
-                    <div className="fade-out">popup content</div>
-                </Popup>
+                <input className="styled-button longer-button" type="submit"></input>
+                {isRunning && <div className="timer-popup">Question succesfully sent</div>}
             </form>
-            {!isLoaded && <div>Loading...</div>}
+            {/* <button className="styled-button longer-button" onClick={showPopup}>press me</button> */}
             {error && <div>{error.message}</div>}
+            {!isLoaded && <div>Loading...</div>}
         </div>
     )
 }

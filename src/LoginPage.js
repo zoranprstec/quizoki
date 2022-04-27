@@ -57,17 +57,19 @@ export default function LoginPage() {
     }
 
     return (
-        <div>
-            <form onSubmit={submit}>
+        <div className="registration">
+            <form onSubmit={submit} className="form-container">
                 <input
+                    className="form-input"
                     type="email"
                     placeholder="E-mail"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    ></input>
+                ></input>
                 <br />
                 <input
+                    className="form-input"
                     type="password"
                     placeholder="Password"
                     name="password"
@@ -76,11 +78,17 @@ export default function LoginPage() {
                 ></input>
                 <br />
                 <input
+                    className="styled-button"
                     type="submit"
                 ></input>
                 <br />
-                {!isLoaded && <div>Loading...</div>}
             </form>
+            <hr className="vertical-line" />
+            <div className="welcome-text-container">
+                <h2>Welcome back!</h2>
+                <p>Please login so you can start answering some questions!</p>
+            </div>
+            {!isLoaded && <div>Loading...</div>}
         </div>
     )
 }
