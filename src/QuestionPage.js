@@ -1,45 +1,74 @@
 import QuestionCard from "./QuestionCard"
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function QuestionPage(props) {
-    const [data, setData] = useState()
-    const [isLoaded, setIsLoaded] = useState(true)
+    const [localData, setLocalData] = useState([])
+    const [isLoaded, setIsLoaded] = useState(false)
     const [error, setError] = useState(null)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(true)
+    const [submitted, setSubmitted] = useState(false)
+    const [points, setPoints] = useState(0)
+    const [update, setUpdate] = useState(0)
 
-    const navigate = useNavigate()
+    useEffect(() => {
+        for (let i = 0; i < 5; i++) {
+            const request = {
+                method: "GET",
+                headers: { Accept: "application/json", "Content-Type": "application/json" }
+            }
+            fetch(`https://localhost:44396/api/Question/RandomQuestion?category=${props.quizData.category}`, request)
+            .then(response => response.json())
+            .then(dataReceived => {
+                setLocalData(data => {
+                    const arr = data
+                    arr.push(dataReceived)
+                    return arr
+                })
+                setLoadedSuccessfully(true)
+                setUpdate(prevState => prevState + 1)
+            },
+            error => {
+                setError(error)
+                setLoadedSuccessfully(false)
+            })
+            .finally(() => {
+                setIsLoaded(true)
+            })
+        }
+    }, [])
 
-    // setIsLoaded(false)
+    if (error) {
+        return (
+            <div>
+                Error: {error.message}
+                <br />
+                <button className="styled-button horizontal-align longer-button" onClick={() => props.setStartPage(prevPage => !prevPage)}>Back</button>
+            </div>
+        )
+    } else if (!isLoaded) {
+        return <h4 className="loading-text">Loading...</h4>
+    } else {
+        const questions = localData.map(element => (
+            <QuestionCard 
+                key={Math.random()}
+                question={element.title}
+                correct_answer={element.answer}
+                incorrect_answers={[element.answerOne, element.answerTwo, element.answerThree, element.answerFour]}
+                submitted={submitted}
+                setPoints={setPoints}
+            />
+        ))
 
-//     for (let i = 0; i < 5; i++) {
-//         const request = {
-//             method: "GET",
-//             headers: { Accept: "application/json", "Content-Type": "application/json" },
-//             body: JSON.stringify({
-//                 category: props.quizData.category
-//             })
-//         }
-
-
-//         fetch("https://localhost:44396/api/Question/RandomQuestion")
-//             .then(response => response.json())
-//             .then(data => {
-//                 setData(data => ([{}]))
-//                 setLoadedSuccessfully(true)
-//             },
-//             error => {
-//                 setIsLoaded(true)
-//                 setError(error)
-//                 setLoadedSuccessfully(false)
-//                 alert(error.message)
-//             })
-//     }
-// }
-
+        return ( 
+            <main className="vertical-align">
+                {questions}
+                <button className="styled-button horizontal-align longer-button" onClick={() => props.setStartPage(prevPage => !prevPage)}>Back</button>
+            </main>
+        )
+    }
 }
 
-// const [error, setError] = useState(null);
 // const [data, setData] = useState([])
 // const [isLoaded, setIsLoaded] = useState(false)
 // const [submitted, setSubmitted] = useState(false)

@@ -42,8 +42,6 @@ export default function AddQuestionPage() {
         }))
     }
 
-    console.log("loaded succesfully " + loadedSuccessfully)
-
     function handleSubmit(event) {
         const request = {
             method: "POST",
@@ -64,7 +62,7 @@ export default function AddQuestionPage() {
         fetch("https://localhost:44396/api/Question/AddQuestion", request)
             .then(response => {
                 if (!response.ok) {
-                    throw Error("Server responded with 'fuck you' code")
+                    throw Error("Server responded with 'screw you' code")
                 }
             })
             .then(() => {
@@ -177,26 +175,3 @@ export default function AddQuestionPage() {
         </div>
     )
 }
-
-
-//  commented because backup
-// fetch("https://localhost:44396/api/Question/AddQuestion", request)
-// .then(response => {
-//     if (!response.ok) {
-//         throw Error("Server responded with 'fuck you' code")
-//     }
-//     console.log(response.json())
-// })
-// .then(data => {
-//     console.log(data)
-//     setIsLoaded(true)
-//     setLocalData(data)
-//     setLoadedSuccessfully(true)
-// },
-// error => {
-//     setIsLoaded(true)
-//     setError(error)
-//     setLoadedSuccessfully(false)
-//     alert(error.message)
-//     console.log(error)
-// })

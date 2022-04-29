@@ -2,8 +2,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function StartPage(props) {
-    const navigate = useNavigate()
-
     function handleDropdown(event) {
         const {value, name} = event.target
         props.setQuizData(prevData => {
@@ -17,7 +15,7 @@ export default function StartPage(props) {
     return (
         <div className="main-page">
             <h1 className="title">quiZoMania</h1>
-            <h3 className="subtitle">Ya, dis here is all us, brace yerselfs</h3>
+            <h3 className="subtitle">Quiz app by Zoran and Marin</h3>
             <div className="dropdown-container">
                 <select
                     value={props.quizData.category}
