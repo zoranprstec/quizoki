@@ -30,17 +30,6 @@ export default function StartPage(props) {
                     <option value="3">History</option>
                     <option value="4">Science</option>
                 </select>
-                <select
-                    value={props.quizData.difficulty}
-                    name="difficulty"
-                    onChange={handleDropdown}
-                    className="dropdown"
-                >
-                    <option value="">Any Difficulty</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
             </div>
             <button className="styled-button longer-button" onClick={() => props.setStartPageActive(false)}>Start the damn quiz!</button>
         </div>

@@ -8,14 +8,29 @@ import Navbar from "./Navbar"
 import { useState, useEffect, createContext } from "react"
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 
-export const MyContext = createContext("default value")
+export const credentials = {
+    logged: {
+        access: true
+    },
+    notLogged: {
+        access: false
+    }
+}
+export const MyContext = createContext(
+    credentials.notLogged
+)
 
 export default function App () {
+    const [login, setLogin] = useState(credentials.notLogged)
     const [startPageActive, setStartPageActive] = useState(true)
     const [quizData, setQuizData] = useState({
         category: ""
     })
 
+    function toggleLogin() {
+        setLogin(prevState => prevState.access === true ? credentials.notLogged : credentials.logged)
+    }
+    
     const startpage = startPageActive ? 
     <StartPage 
         quizData={quizData} 
@@ -29,16 +44,16 @@ export default function App () {
     />
 
     return (
-        <MyContext.Provider value={"provided value"}>
+        <MyContext.Provider value={login}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Navbar />}>
+                    <Route path="/" element={<Navbar toggleLogin={toggleLogin} />}>
                         <Route index element={<LogoPage />} />
                         <Route path="register" element={<RegistrationPage />} />
-                        <Route path="login" element={<LoginPage />} />
+                        <Route path="login" element={<LoginPage toggleLogin={toggleLogin} />} />
                         <Route path="startpage" element={startpage} />
                         <Route path="addquestion" element={<AddQuestionPage />} />
-                        {/* <Route path="questionpage" element={<QuestionPage quizData={quizData} setQuizData={setQuizData} />} /> */}
+                        <Route path="*" element={<h2 style={{paddingLeft: "1rem"}}>Uh-oh... wrong address!</h2>} />
                     </Route>
                 </Routes>
             </BrowserRouter>

@@ -38,6 +38,14 @@ export default function QuestionPage(props) {
         }
     }, [])
 
+    function handleSubmitButton() {
+    if (!submitted) {
+        setSubmitted(true)
+    } else {
+        props.setStartPage(prevPage => !prevPage)
+    }
+}
+
     if (error) {
         return (
             <div>
@@ -49,7 +57,7 @@ export default function QuestionPage(props) {
     } else if (!isLoaded) {
         return <h4 className="loading-text">Loading...</h4>
     } else {
-        const questions = localData.map(element => (
+        const questionCards = localData.map(element => (
             <QuestionCard 
                 key={Math.random()}
                 question={element.title}
@@ -62,8 +70,10 @@ export default function QuestionPage(props) {
 
         return ( 
             <main className="vertical-align">
-                {questions}
-                <button className="styled-button horizontal-align longer-button" onClick={() => props.setStartPage(prevPage => !prevPage)}>Back</button>
+                {questionCards}
+                {submitted && <h3 className="score-text">You scored {points}/{questionCards.length}</h3>}
+                <button className="styled-button horizontal-align longer-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
+                <br />
             </main>
         )
     }

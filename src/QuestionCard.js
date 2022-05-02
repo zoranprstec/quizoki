@@ -24,6 +24,8 @@ export default function QuestionCard(props) {
         })
     }
 
+    console.log(answer)
+
     let isCorrect = false
 
     useEffect(() => {
@@ -64,6 +66,7 @@ export default function QuestionCard(props) {
                 </label>
             )}
     )
+
     const decodedQuestion = he.decode(props.question)
 
     return (

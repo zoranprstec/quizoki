@@ -1,15 +1,16 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function LoginPage() {
+export default function LoginPage(props) {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
-    const [data, setData] = useState(null)
+    const [localData, setLocalData] = useState(null)
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(true)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
+    const [update, setUpdate] = useState(0)
 
     const navigate = useNavigate()
 
@@ -22,7 +23,7 @@ export default function LoginPage() {
             }
         ))
     }
-
+    
     function submit(event) {
         const request = {
             method: "POST",
@@ -32,14 +33,14 @@ export default function LoginPage() {
                 Password: formData.password
             })
         }
-
+        
         setIsLoaded(false)
         
         fetch("https://localhost:44396/api/Auth/login", request)
             .then(response => response.json())
             .then(data => {
                 setIsLoaded(true)
-                setData(data)
+                setLocalData(data)
                 setLoadedSuccessfully(true)
             },
             (error) => {
@@ -48,14 +49,18 @@ export default function LoginPage() {
                 setLoadedSuccessfully(false)
                 alert(error.message)
             })
-
-        event.preventDefault()
-
-        if (loadedSuccessfully && data.successfull) {
-            navigate("/startpage", { replace: false })
-        }
+            
+            event.preventDefault()
     }
 
+    useEffect(() => {
+        if (loadedSuccessfully && localData.successfull) {
+            props.toggleLogin()
+            navigate("/startpage", { replace: false })
+        }
+    }, [loadedSuccessfully])
+
+        
     return (
         <div className="registration">
             <form onSubmit={submit} className="form-container">
