@@ -6,13 +6,20 @@ export default function QuestionCard(props) {
         [props.question]: ""                            // question: answer (malo čudno, znam; to je ono selectano)
     })
     const [answersArray, setAnswersArray] = useState(() => initializeArray())
-    const [selectedAnswer, setSelectedAnswer] = useState("")
-    // const {[props.question]: answer} = answerData
+    // const [selectedAnswer, setSelectedAnswer] = useState("")
+    // const {[props.question]: selectedAnswerToStorage} = answerData
+    const {[props.question]: selectedAnswer} = answerData
+
+
+    // local storage moram koristiti jer neko sranje kod njih ne štima. State se gubi nakon kaj se parent rendera
     
-    useEffect(() => {
-        const {[props.question]: answerConst} = answerData
-        setSelectedAnswer(answerConst)
-    }, [answerData])
+    // selectedAnswerToStorage && localStorage.setItem("selectedAnswer", selectedAnswerToStorage)
+    
+    
+    // useEffect(() => {
+    //     const {[props.question]: answerConst} = answerData
+    //     setSelectedAnswer(answerConst)
+    // }, [answerData])
     
     function initializeArray() {
         const answersArray = props.incorrect_answers

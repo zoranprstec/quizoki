@@ -44,19 +44,26 @@ export default function App () {
     />
 
     return (
-        <MyContext.Provider value={login}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Navbar toggleLogin={toggleLogin} />}>
-                        <Route index element={<LogoPage />} />
-                        <Route path="register" element={<RegistrationPage />} />
-                        <Route path="login" element={<LoginPage toggleLogin={toggleLogin} />} />
-                        <Route path="startpage" element={startpage} />
-                        <Route path="addquestion" element={<AddQuestionPage />} />
-                        <Route path="*" element={<h2 style={{paddingLeft: "1rem"}}>Uh-oh... wrong address!</h2>} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </MyContext.Provider>
+        // <StartPage
+        //     quizData={quizData} 
+        //     setQuizData={setQuizData} 
+        //     startPageActive={startPageActive} 
+        //     setStartPageActive={setStartPageActive} 
+        // />
+        startpage
+        // <MyContext.Provider value={login}>
+        //     <BrowserRouter>
+        //         <Routes>
+        //             <Route path="/" element={<Navbar toggleLogin={toggleLogin} />}>
+        //                 <Route index element={<LogoPage />} />
+        //                 <Route path="register" element={<RegistrationPage />} />
+        //                 <Route path="login" element={<LoginPage toggleLogin={toggleLogin} />} />
+        //                 <Route path="startpage" element={startpage} />
+        //                 <Route path="addquestion" element={<AddQuestionPage />} />
+        //                 <Route path="*" element={<h2 style={{paddingLeft: "1rem"}}>Uh-oh... wrong address!</h2>} />
+        //             </Route>
+        //         </Routes>
+        //     </BrowserRouter>
+        // </MyContext.Provider>
     )
 }
