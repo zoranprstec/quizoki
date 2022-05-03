@@ -6,7 +6,13 @@ export default function QuestionCard(props) {
         [props.question]: ""                            // question: answer (malo čudno, znam; to je ono selectano)
     })
     const [answersArray, setAnswersArray] = useState(() => initializeArray())
-    const {[props.question]: answer} = answerData
+    const [selectedAnswer, setSelectedAnswer] = useState("")
+    // const {[props.question]: answer} = answerData
+    
+    useEffect(() => {
+        const {[props.question]: answerConst} = answerData
+        setSelectedAnswer(answerConst)
+    }, [answerData])
     
     function initializeArray() {
         const answersArray = props.incorrect_answers
@@ -24,7 +30,6 @@ export default function QuestionCard(props) {
         })
     }
 
-    console.log(answer)
 
     let isCorrect = false
 
@@ -34,24 +39,24 @@ export default function QuestionCard(props) {
     
     const showAnswers = answersArray.map (
         element => {
-            const selectedClass = answer === element ? "form-control-selected" : "form-control"
+            const selectedClass = selectedAnswer === element ? "form-control-selected" : "form-control"
             const correctClass = "form-control-correct"
             const incorrectClass = "form-control-incorrect"
             let submittedClass = ""
 
             if (props.correct_answer === element) {
                 submittedClass = correctClass
-                if(answer === element) {
+                if(selectedAnswer === element) {
                     isCorrect = true
                 }
-            } else if (answer === element && props.correct_answer !== element) {
+            } else if (selectedAnswer === element && props.correct_answer !== element) {
                 submittedClass = incorrectClass
             } else {
                 submittedClass = "form-control"
             }
 
             return (
-                <label key={`label${element}`} className={props.submitted ? submittedClass : selectedClass}>
+                <label key={Math.random()} className={props.submitted ? submittedClass : selectedClass}>
                     <input
                         disabled={props.submitted}
                         key={element}
@@ -59,7 +64,7 @@ export default function QuestionCard(props) {
                         id={element}
                         name={props.question}
                         value={element}
-                        checked={answer === element}
+                        checked={selectedAnswer === element}
                         onChange={handleChange}
                     />
                     {he.decode(element)}
@@ -71,6 +76,7 @@ export default function QuestionCard(props) {
 
     return (
         <section>
+            <p>{props.update}</p>
             <h2 className="question">{decodedQuestion}</h2>
             <div className="answers-row">
                 {showAnswers}

@@ -39,12 +39,14 @@ export default function QuestionPage(props) {
     }, [])
 
     function handleSubmitButton() {
-    if (!submitted) {
-        setSubmitted(true)
-    } else {
-        props.setStartPage(prevPage => !prevPage)
+        if (!submitted) {
+            setSubmitted(true)
+        } else {
+            props.setStartPage(prevPage => !prevPage)
+        }
     }
-}
+
+    console.log("Question Page rendered")
 
     if (error) {
         return (
@@ -65,6 +67,7 @@ export default function QuestionPage(props) {
                 incorrect_answers={[element.answerOne, element.answerTwo, element.answerThree, element.answerFour]}
                 submitted={submitted}
                 setPoints={setPoints}
+                update={update}
             />
         ))
 
@@ -73,6 +76,7 @@ export default function QuestionPage(props) {
                 {questionCards}
                 {submitted && <h3 className="score-text">You scored {points}/{questionCards.length}</h3>}
                 <button className="styled-button horizontal-align longer-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
+                <button className="styled-button horizontal-align longer-button" onClick={() => setUpdate(prevState => prevState + 1)}>change value</button>
                 <br />
             </main>
         )
