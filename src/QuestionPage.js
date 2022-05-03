@@ -46,8 +46,6 @@ export default function QuestionPage(props) {
         }
     }
 
-    console.log("Question Page rendered")
-
     if (error) {
         return (
             <div>
@@ -61,13 +59,12 @@ export default function QuestionPage(props) {
     } else {
         const questionCards = localData.map(element => (
             <QuestionCard 
-                key={Math.random()}
+                key={element.title}
                 question={element.title}
                 correct_answer={element.answer}
                 incorrect_answers={[element.answerOne, element.answerTwo, element.answerThree, element.answerFour]}
                 submitted={submitted}
                 setPoints={setPoints}
-                update={update}
             />
         ))
 
@@ -76,7 +73,6 @@ export default function QuestionPage(props) {
                 {questionCards}
                 {submitted && <h3 className="score-text">You scored {points}/{questionCards.length}</h3>}
                 <button className="styled-button horizontal-align longer-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
-                <button className="styled-button horizontal-align longer-button" onClick={() => setUpdate(prevState => prevState + 1)}>change value</button>
                 <br />
             </main>
         )
