@@ -23,12 +23,9 @@ body {
 /* -- Navbar -- ----------------------------------------------*/
 
 nav {
-    /* margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%; */
     overflow: hidden;
-    background-color: rgb(78, 78, 78); 
+    background-color: rgb(78, 78, 78);
+    z-index: 1;
 }
 
 .nav--link, .menu-icon{
@@ -109,15 +106,14 @@ img {
     background-color: rgba(255, 255, 255, 0.555);
 }
 
-.styled-button + .styled-button {
+/* .styled-button + .styled-button {
     margin-left: 2em;
-}
+} */
 
 /* -- Start Page -- ----------------------------------------------*/
 
 .main-page {
     display: flex;
-    height: 95vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -264,7 +260,7 @@ input[type="radio"] {
     left: 50%;
     transform: translateX(-50%) translateY(-40%);
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: wrap-reverse;
     width: 90%;
     justify-content: center;
 }
@@ -307,6 +303,13 @@ br + .register-button {
 }
 
 /* -- MISC -- ----------------------------------------------*/
+
+.flex-row-to-col {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
 
 .horizontal-align {
     display: block;

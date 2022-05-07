@@ -13,7 +13,7 @@ export default function StartPage(props) {
     }
 
     return (
-        <div className="main-page">
+        <div className="main-page vertical-center">
             <h1 className="title">quiZoMania</h1>
             <h3 className="subtitle">Quiz app by Zoran and Marin</h3>
             <div className="dropdown-container">
