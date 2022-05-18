@@ -57,16 +57,16 @@ export default function QuestionPage(props) {
     } else if (!isLoaded) {
         return <h4 className="loading-text">Loading...</h4>
     } else {
-        const questionCards = localData.map(element => (
-            <QuestionCard 
-                key={element.title}
-                question={element.title}
-                correct_answer={element.answer}
-                incorrect_answers={[element.answerOne, element.answerTwo, element.answerThree, element.answerFour]}
+        let i = 0
+        const questionCards = localData.map(element => {
+            i++
+            return <QuestionCard 
+                elements={element}
+                key={element.title + i}
                 submitted={submitted}
                 setPoints={setPoints}
             />
-        ))
+    })
 
         return ( 
             <main className="vertical-align">

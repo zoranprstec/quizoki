@@ -20,6 +20,33 @@ body {
     box-sizing: border-box;
 }
 
+#main {
+    transition: 0.5s;
+}
+
+/* -- Sidebar -- -------------------------------------------- */
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    /* overflow-x: hidden; */
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar--btn {
+    background-color: red;
+    margin: 0.5rem;
+    /* color: white; */
+    border-radius: 1rem;
+}
+
+
 /* -- Navbar -- ----------------------------------------------*/
 
 nav {

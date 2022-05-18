@@ -16,13 +16,27 @@ export const credentials = {
         access: false
     }
 }
+const themeObject = {
+    theme1: {
+        background: "linear-gradient(146deg, rgb(34, 192, 195) 0%, rgb(255, 224, 156) 100%)"
+    },
+    theme2: {
+        background: "linear-gradient(146deg, rgb(0, 0, 0) 0%, rgb(255, 224, 156) 100%)"
+    }
+}
+
 export const MyContext = createContext(
     credentials.notLogged
+)
+export const ThemeContext = createContext(
+
 )
 
 export default function App () {
     const [login, setLogin] = useState(credentials.notLogged)
+    const [theme, setTheme] = useState(themeObject.theme2)
     const [startPageActive, setStartPageActive] = useState(true)
+    // console.log(theme)
     const [quizData, setQuizData] = useState({
         category: ""
     })

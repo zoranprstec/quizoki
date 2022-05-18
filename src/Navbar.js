@@ -2,13 +2,13 @@ import { createRef, useContext, useEffect, useRef, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { MyContext } from "./App";
 import ResponsiveNavbar from "./functions/ResponsiveNavbar";
+import ResponsiveSidebar from "./functions/ResponsiveSidebar";
 
 export default function Navbar(props) {
     const context = useContext(MyContext)
     const location = useLocation()
     const {pathname} = location
-    const [test, setTest] = useState("nav--link")
-    
+
     useEffect(() => {
         const nodeArray = document.querySelectorAll("a")
         for (const a of nodeArray) {
@@ -24,8 +24,12 @@ export default function Navbar(props) {
         }
     }, [pathname, location])
 
+    function chooseTheme(event) {
+        console.log(event)
+    }
+
     return (
-        <div>
+        <div id="main">
             <nav id="myNavbar">
                 <Link id="/" to="/">Home Page</Link>
                 { context.access && <Link id="/startpage" className="nav--link" to="startpage">Start the Quiz</Link> }
@@ -36,7 +40,12 @@ export default function Navbar(props) {
                     <i className="fa fa-bars"></i>
                 </div>
             </nav>
-                <button className="" onClick={props.toggleLogin}>Sign out / in</button>
+            <button className="" onClick={props.toggleLogin}>Sign out / in</button>
+            <button className="" onClick={ResponsiveSidebar}>Themes</button>
+            <div id="sidebarId" className="sidebar">
+                <div className="sidebar--btn" onClick={chooseTheme}>Light</div>
+                <div className="sidebar--btn" onClick={chooseTheme}>Dark</div>
+            </div>
             <Outlet />
         </div>
     )
