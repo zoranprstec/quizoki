@@ -1,8 +1,22 @@
+import React from "react"
 import he from "he"                         // library za dekodiranje &quot; i sličnih gluposti
 import {useState, useEffect} from "react"
 
-export default function QuestionCard(props) {
-    const { answerOne, answerTwo, answerThree, answerFour, answer, title } = props.elements
+export interface QuestionCardProps {
+    elements: {
+        answerOne: string
+        answerTwo: string
+        answerThree: string
+        answerFour: string
+        answer: string
+        title: string
+    }
+    setPoints: (arg0: (prevState: any) => any) => any
+    submitted: boolean
+}
+
+export default function QuestionCard({ elements, setPoints, submitted }: QuestionCardProps) {
+    const { answerOne, answerTwo, answerThree, answerFour, answer, title } = elements
     const incorrect_answers = [answerOne, answerTwo, answerThree, answerFour]
     const correct_answer = answer
     const question = title
@@ -18,7 +32,7 @@ export default function QuestionCard(props) {
         return answersArray.sort()
     }
 
-    function handleChange(event) {
+    function handleChange(event: { target: { value: any; name: any } }) {
         const {value, name} = event.target
         setAnswerData(prevAnswers => {
             return {
@@ -32,8 +46,8 @@ export default function QuestionCard(props) {
     let isCorrect = false
 
     useEffect(() => {
-        isCorrect && props.setPoints(prevState => prevState + 1)
-    }, [props.submitted])
+        isCorrect && setPoints((prevState: number) => prevState + 1)
+    }, [submitted])
     
     const showAnswers = answersArray.map (
         element => {
@@ -54,9 +68,9 @@ export default function QuestionCard(props) {
             }
 
             return (
-                <label key={Math.random()} className={props.submitted ? submittedClass : selectedClass}>
+                <label key={Math.random()} className={submitted ? submittedClass : selectedClass}>
                     <input
-                        disabled={props.submitted}
+                        disabled={submitted}
                         key={element}
                         type="radio"
                         id={element}

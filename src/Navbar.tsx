@@ -1,10 +1,15 @@
-import { createRef, useContext, useEffect, useRef, useState } from "react";
+import * as React from "react"
+import { useContext, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { MyContext } from "./App";
 import ResponsiveNavbar from "./functions/ResponsiveNavbar";
 import ResponsiveSidebar from "./functions/ResponsiveSidebar";
 
-export default function Navbar(props) {
+interface NavbarProps {
+    toggleLogin: React.MouseEventHandler<HTMLButtonElement> | undefined
+}
+
+export default function Navbar({ toggleLogin }: NavbarProps) {
     const context = useContext(MyContext)
     const location = useLocation()
     const {pathname} = location
@@ -16,15 +21,15 @@ export default function Navbar(props) {
         }
         if (document.getElementById(pathname)) {
             const link = document.getElementById(pathname)
-            if (pathname === link.id) {
-                link.className = "nav--link active"
+            if (pathname === link!.id) {
+                link!.className = "nav--link active"
             } else {
-                link.className = "nav--link"
+                link!.className = "nav--link"
             }
         }
     }, [pathname, location])
 
-    function chooseTheme(event) {
+    function chooseTheme(event: any) {
         console.log(event)
     }
 
@@ -40,7 +45,7 @@ export default function Navbar(props) {
                     <i className="fa fa-bars"></i>
                 </div>
             </nav>
-            <button className="" onClick={props.toggleLogin}>Sign out / in</button>
+            <button className="" onClick={toggleLogin}>Sign out / in</button>
             <button className="" onClick={ResponsiveSidebar}>Themes</button>
             <div id="sidebarId" className="sidebar">
                 <div className="sidebar--btn" onClick={chooseTheme}>Light</div>

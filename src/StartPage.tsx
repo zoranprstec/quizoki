@@ -1,10 +1,16 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import * as React from "react";
 
-export default function StartPage(props) {
-    function handleDropdown(event) {
+interface StartPageProps {
+    setQuizData: (arg0: (prevData: any) => any) => void
+    quizData: { category: string | number | readonly string[] | undefined }
+    startPageActive: boolean
+    setStartPageActive: (arg0: boolean) => void
+}
+
+export default function StartPage({setQuizData, quizData, setStartPageActive}: StartPageProps) {
+    function handleDropdown(event: { target: { value: any; name: any } }) {
         const {value, name} = event.target
-        props.setQuizData(prevData => {
+        setQuizData((prevData: any) => {
             return {
                 ...prevData,
                 [name]: value
@@ -18,7 +24,8 @@ export default function StartPage(props) {
             <h3 className="subtitle">Quiz app by Zoran and Marin</h3>
             <div className="dropdown-container">
                 <select
-                    value={props.quizData.category}
+                    title="Category Select"
+                    value={quizData.category}
                     name="category"
                     onChange={handleDropdown}
                     className="dropdown"
@@ -31,7 +38,7 @@ export default function StartPage(props) {
                     <option value="4">Science</option>
                 </select>
             </div>
-            <button className="styled-button longer-button" onClick={() => props.setStartPageActive(false)}>Start the damn quiz!</button>
+            <button className="styled-button longer-button" onClick={() => setStartPageActive(false)}>Start the damn quiz!</button>
         </div>
     )
 }

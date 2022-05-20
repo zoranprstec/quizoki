@@ -1,7 +1,12 @@
-import { useContext, useEffect, useState } from "react"
+import * as React from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function LoginPage(props) {
+interface LoginPageProps {
+    toggleLogin: () => void
+}
+
+export default function LoginPage({ toggleLogin }: LoginPageProps) {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -10,11 +15,10 @@ export default function LoginPage(props) {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(true)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
-    const [update, setUpdate] = useState(0)
 
     const navigate = useNavigate()
 
-    function handleChange(event) {
+    function handleChange(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
         setFormData(prevData => (
             {
@@ -24,7 +28,7 @@ export default function LoginPage(props) {
         ))
     }
     
-    function submit(event) {
+    function submit(event: { preventDefault: () => void }) {
         const request = {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -54,8 +58,8 @@ export default function LoginPage(props) {
     }
 
     useEffect(() => {
-        if (loadedSuccessfully && localData.successfull) {
-            props.toggleLogin()
+        if (loadedSuccessfully && localData!["successfull"]) {
+            toggleLogin()
             navigate("/startpage", { replace: false })
         }
     }, [loadedSuccessfully])

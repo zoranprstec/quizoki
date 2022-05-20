@@ -1,8 +1,9 @@
+import * as React from "react"
 import { useEffect, useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function RegistrationPage() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<any>({
         userName: "",
         email: "",
         password: "",
@@ -11,15 +12,15 @@ export default function RegistrationPage() {
     const [localData, setLocalData] = useState({
         successfull: ""
     })
-    const [isLoaded, setIsLoaded] = useState(true)
-    const [error, setError] = useState(null)
-    const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
+    const [loadedSuccessfully, setLoadedSuccessfully] = useState<boolean>(false)
+    const [isLoaded, setIsLoaded] = useState<boolean>(true)
+    const [error, setError] = useState<any>(null)
 
     const navigate = useNavigate()
 
-    function updateForm(event) {
+    function updateForm(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
-        setFormData(prevData => {
+        setFormData((prevData: any) => {
             return {
                 ...prevData,
                 [name]: value
@@ -27,7 +28,7 @@ export default function RegistrationPage() {
         })
     }
     
-    function sendDataToMP(event) {
+    function sendDataToMP(event: { preventDefault: () => void }) {
         const request = {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },

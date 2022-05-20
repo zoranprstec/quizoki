@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from "react"
+import * as React from "react"
+import { useEffect, useState } from "react"
 import { useStopwatch } from "react-timer-hook"
 
 export default function AddQuestionPage() {
-    const [localData, setLocalData] = useState({
-        successfull: false
-    })
     const [isLoaded, setIsLoaded] = useState(true)
     const [error, setError] = useState(null)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
@@ -26,7 +24,7 @@ export default function AddQuestionPage() {
       } = useStopwatch({ autoStart: false });
 
     if (seconds >= 4) {
-        reset(null, false)
+        reset(undefined, false)
     }
 
     // function showPopup() {
@@ -34,7 +32,7 @@ export default function AddQuestionPage() {
     //     isRunning ? pause() : start()
     // }
  
-    function handleUpdate(event) {
+    function handleUpdate(event: { target: { name: any; value: any } }) {
         const {name, value} = event.target
         setFormData(prevData => ({
             ...prevData,
@@ -42,7 +40,7 @@ export default function AddQuestionPage() {
         }))
     }
 
-    function handleSubmit(event) {
+    function handleSubmit(event: { preventDefault: () => void }) {
         const request = {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -53,7 +51,8 @@ export default function AddQuestionPage() {
                 answerThree: formData.wrongAnswer3,
                 answerFour: formData.wrongAnswer4,
                 answer: formData.correctAnswer,
-                category: parseInt(formData.category)
+                // category: parseInt(formData.category)
+                category: formData.category
             })
         }
 
@@ -92,13 +91,14 @@ export default function AddQuestionPage() {
         <div>
             <form onSubmit={handleSubmit} className="vertical-center">
                 <select
-                    value={formData.category}
+                    title="Add Question"
+                    value={+formData.category}
                     name="category"
                     onChange={handleUpdate}
                     className="dropdown standard-width"
                     required
                 >
-                    <option value={null}>-- Choose Category --</option>
+                    <option value={undefined}>-- Choose Category --</option>
                     <option value={0}>Movies</option>
                     <option value={1}>TV Shows</option>
                     <option value={2}>Books</option>
@@ -170,7 +170,7 @@ export default function AddQuestionPage() {
                 {isRunning && <div className="timer-popup">Question succesfully sent</div>}
             </form>
             {/* <button className="styled-button longer-button" onClick={showPopup}>press me</button> */}
-            {error && <div>{error.message}</div>}
+            {error && <div>{error["message"]}</div>}
             {!isLoaded && <div>Loading...</div>}
         </div>
     )
