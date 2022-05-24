@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    font-family: 'Anek Tamil', sans-serif;
+    font-family: 'Roboto', 'Anek Tamil', sans-serif;
     font-size: larger;
     margin: 0;
     background: rgb(34,193,195);
@@ -58,12 +58,13 @@ nav {
 .nav--link, .menu-icon{
     float: left;
     display: block;
-    color: white;
+    color: rgb(0, 169, 145);
     text-align: center;
     padding: 1rem;
-    text-decoration: none;
     font-size: 1.1em;
     border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .nav--link:hover, .menu-icon:hover {
@@ -73,6 +74,7 @@ nav {
 
 .active {
     background-color: crimson;
+    color: white;
 }
 
 nav .menu-icon {
@@ -99,7 +101,7 @@ nav .menu-icon {
         display: block;
         text-align: left;
     }
-}
+} 
 
 /* -- Logo Page -- ----------------------------------------------*/
 
@@ -110,6 +112,11 @@ nav .menu-icon {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     text-align: center;
+}
+
+.vertical-center h1 {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 img {

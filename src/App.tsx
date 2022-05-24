@@ -32,7 +32,7 @@ export const MyContext = createContext(
 
 export default function App () {
     const [login, setLogin] = useState(credentials.notLogged)
-    const [theme, setTheme] = useState(themeObject.theme2)
+    // const [theme, setTheme] = useState(themeObject.theme2)
     const [startPageActive, setStartPageActive] = useState<boolean>(true)
     const [quizData, setQuizData] = useState({
         category: ""
