@@ -1,4 +1,5 @@
-import * as React from "react";
+import * as React from "react"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
 interface StartPageProps {
     setQuizData: (arg0: (prevData: any) => any) => void
@@ -38,7 +39,9 @@ export default function StartPage({setQuizData, quizData, setStartPageActive}: S
                     <option value="4">Science</option>
                 </select>
             </div>
-            <button className="styled-button longer-button" onClick={() => setStartPageActive(false)}>Start the damn quiz!</button>
+            <div className="flex-row-to-col">
+                <Button onClick={() => setStartPageActive(false)} circled={true}>Start the damn quiz!</Button>
+            </div>
         </div>
     )
 }

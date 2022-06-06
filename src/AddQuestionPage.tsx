@@ -1,10 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useStopwatch } from "react-timer-hook"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
 export default function AddQuestionPage() {
     const [isLoaded, setIsLoaded] = useState(true)
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
     const [loadedSuccessfully, setLoadedSuccessfully] = useState(false)
     const [formData, setFormData] = useState({
         title: "",
@@ -21,18 +22,13 @@ export default function AddQuestionPage() {
         start,
         pause,
         reset,
-      } = useStopwatch({ autoStart: false });
+      } = useStopwatch({ autoStart: false })
 
     if (seconds >= 4) {
         reset(undefined, false)
     }
-
-    // function showPopup() {
-    //     reset()
-    //     isRunning ? pause() : start()
-    // }
  
-    function handleUpdate(event: { target: { name: any; value: any } }) {
+    function handleUpdate(event: { target: { name: string; value: string | number } }) {
         const {name, value} = event.target
         setFormData(prevData => ({
             ...prevData,
@@ -51,7 +47,6 @@ export default function AddQuestionPage() {
                 answerThree: formData.wrongAnswer3,
                 answerFour: formData.wrongAnswer4,
                 answer: formData.correctAnswer,
-                // category: parseInt(formData.category)
                 category: formData.category
             })
         }
@@ -61,7 +56,7 @@ export default function AddQuestionPage() {
         fetch("https://localhost:44396/api/Question/AddQuestion", request)
             .then(response => {
                 if (!response.ok) {
-                    throw Error("Server responded with 'screw you' code")
+                    throw Error("Server responded with 'not ok bro' code")
                 }
             })
             .then(() => {
@@ -70,9 +65,9 @@ export default function AddQuestionPage() {
             },
             error => {
                 setIsLoaded(true)
-                setError(error)
+                // setError(error)
                 setLoadedSuccessfully(false)
-                console.log(error)
+                alert(error)
             })
 
         event.preventDefault()
@@ -166,12 +161,17 @@ export default function AddQuestionPage() {
                     required
                 ></input>
                 <br></br>
-                <input className="styled-button longer-button" type="submit"></input>
+                <div className="flex-row-to-col">
+                        <Button submit={true} circled={true}>Send question</Button>
+                    </div>
                 {isRunning && <div className="timer-popup">Question succesfully sent</div>}
             </form>
-            {/* <button className="styled-button longer-button" onClick={showPopup}>press me</button> */}
-            {error && <div>{error["message"]}</div>}
             {!isLoaded && <div>Loading...</div>}
         </div>
     )
 }
+
+    // function showPopup() {
+    //     reset()
+    //     isRunning ? pause() : start()
+    // }

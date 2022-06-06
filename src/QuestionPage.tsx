@@ -1,6 +1,7 @@
 import * as React from "react"
 import QuestionCard from "./QuestionCard"
 import { useState, useEffect } from "react"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
 interface QuestionPageProps {
     // quizData: {
@@ -12,7 +13,7 @@ interface QuestionPageProps {
 
 export default function QuestionPage({ quizData, setStartPage }: QuestionPageProps) {
     const [localData, setLocalData] = useState<any[]>([])
-    const [loadedSuccessfully, setLoadedSuccessfully] = useState<boolean>(true)
+    // const [loadedSuccessfully, setLoadedSuccessfully] = useState<boolean>(true)
     const [submitted, setSubmitted] = useState<boolean>(false)
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
     const [points, setPoints] = useState<number>(0)
@@ -33,12 +34,12 @@ export default function QuestionPage({ quizData, setStartPage }: QuestionPagePro
                     arr.push(dataReceived)
                     return arr
                 })
-                setLoadedSuccessfully(true)
+                // setLoadedSuccessfully(true)
                 setUpdate(prevState => prevState + 1)
             },
             error => {
                 setError(error)
-                setLoadedSuccessfully(false)
+                // setLoadedSuccessfully(false)
             })
             .finally(() => {
                 setIsLoaded(true)
@@ -59,7 +60,9 @@ export default function QuestionPage({ quizData, setStartPage }: QuestionPagePro
             <div>
                 Error: {error["message"]}
                 <br />
-                <button className="styled-button horizontal-align longer-button" onClick={() => setStartPage(prevPage => !prevPage)}>Back</button>
+                <div className="flex-row-to-col">
+                    <Button onClick={() => setStartPage(prevPage => !prevPage)} circled={true}>Back</Button>
+                </div>
             </div>
         )
     } else if (!isLoaded) {
@@ -80,7 +83,9 @@ export default function QuestionPage({ quizData, setStartPage }: QuestionPagePro
             <main className="vertical-align">
                 {questionCards}
                 {submitted && <h3 className="score-text">You scored {points}/{questionCards.length}</h3>}
-                <button className="styled-button horizontal-align longer-button" onClick={() => handleSubmitButton()}>{submitted ? "Play again" : "Submit answers"}</button>
+                <div className="flex-row-to-col">
+                    <Button onClick={() => handleSubmitButton()} circled={true}>{submitted ? "Play again" : "Submit answers"}</Button>
+                </div>
                 <br />
             </main>
         )

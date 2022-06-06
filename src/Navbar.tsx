@@ -1,15 +1,12 @@
 import * as React from "react"
-import { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { MyContext } from "./App";
-import ResponsiveNavbar from "./functions/ResponsiveNavbar";
-import ResponsiveSidebar from "./functions/ResponsiveSidebar";
-import NavigationBar from "@kiwicom/orbit-components/lib/NavigationBar";
-import LinkList from "@kiwicom/orbit-components/lib/LinkList";
-import TextLink from "@kiwicom/orbit-components/lib/TextLink";
+import { MyContext } from "./App"
+import ResponsiveNavbar from "./functions/ResponsiveNavbar"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
 interface NavbarProps {
-    toggleLogin: React.MouseEventHandler<HTMLButtonElement> | undefined
+    toggleLogin: any
 }
 
 export default function Navbar({ toggleLogin }: NavbarProps) {
@@ -48,12 +45,12 @@ export default function Navbar({ toggleLogin }: NavbarProps) {
                     <i className="fa fa-bars"></i>
                 </div>
             </nav>
-            {/* <button className="" onClick={toggleLogin}>Sign out / in</button>
-            <button className="" onClick={ResponsiveSidebar}>Themes</button>
+            <Button onClick={toggleLogin} circled={true}>Sign out / in (debug)</Button>
+            {/* <button className="" onClick={ResponsiveSidebar}>Themes</button> */}
             <div id="sidebarId" className="sidebar">
                 <div className="sidebar--btn" onClick={chooseTheme}>Light</div>
                 <div className="sidebar--btn" onClick={chooseTheme}>Dark</div>
-            </div> */}
+            </div>
             <Outlet />
         </div>
     )

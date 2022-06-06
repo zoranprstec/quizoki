@@ -1,9 +1,12 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Text from "@kiwicom/orbit-components/lib/Text"
+import Heading from "@kiwicom/orbit-components/lib/Heading"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
 export default function RegistrationPage() {
-    const [formData, setFormData] = useState<any>({
+    const [formData, setFormData] = useState({
         userName: "",
         email: "",
         password: "",
@@ -14,7 +17,7 @@ export default function RegistrationPage() {
     })
     const [loadedSuccessfully, setLoadedSuccessfully] = useState<boolean>(false)
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
-    const [error, setError] = useState<any>(null)
+    // const [error, setError] = useState<any>(null)
 
     const navigate = useNavigate()
 
@@ -28,7 +31,7 @@ export default function RegistrationPage() {
         })
     }
     
-    function sendDataToMP(event: { preventDefault: () => void }) {
+    function handleSubmit(event: { preventDefault: () => void }) {
         const request = {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -39,8 +42,6 @@ export default function RegistrationPage() {
                 ConfirmPassword: formData.confirmPassword
             })
         }
-
-        console.log("submit function")
 
         setIsLoaded(false)
         
@@ -53,7 +54,7 @@ export default function RegistrationPage() {
             },
             error => {
                 setIsLoaded(true)
-                setError(error)
+                // setError(error)
                 setLoadedSuccessfully(false)
                 alert(error.message)
             })
@@ -70,7 +71,7 @@ export default function RegistrationPage() {
     return (
         <div>
             <div className="registration">
-                <form onSubmit={sendDataToMP} className="form-container" >
+                <form onSubmit={handleSubmit} className="form-container" >
                     <input
                         className="form-input"
                         type="text"
@@ -78,7 +79,8 @@ export default function RegistrationPage() {
                         name="userName"
                         value={formData.userName}
                         onChange={updateForm}
-                    ></input>
+                        required
+                        />
                     <br />
                     <input
                         className="form-input"
@@ -87,7 +89,8 @@ export default function RegistrationPage() {
                         name="email"
                         value={formData.email}
                         onChange={updateForm}
-                    ></input>
+                        required
+                    />
                     <br />
                     <input
                         className="form-input"
@@ -96,7 +99,8 @@ export default function RegistrationPage() {
                         name="password"
                         value={formData.password}
                         onChange={updateForm}
-                    ></input>
+                        required
+                    />
                     <br />
                     <input
                         className="form-input"
@@ -105,18 +109,18 @@ export default function RegistrationPage() {
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={updateForm}
-                    ></input>
+                        required
+                    />
                     <br />
-                    <input
-                        type="submit"
-                        className="styled-button longer-button"
-                    ></input>
+                    <div className="flex-row-to-col">
+                        <Button submit={true} circled={true}>Submit</Button>
+                    </div>
                     <br />
                 </form>
                 <hr className="vertical-line" />
                 <div className="welcome-text-container">
-                    <h2>Welcome!</h2>
-                    <p>Please register so you can start answering some questions!</p>
+                    <Heading spaceAfter="largest" as="h2" type="display">Welcome!</Heading>
+                    <Text size="large">Please register so you can start answering some questions!</Text>
                 </div>
             </div>
             {!isLoaded && <div>Loading...</div>}
