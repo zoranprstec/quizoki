@@ -6,7 +6,7 @@ import ResponsiveNavbar from "./functions/ResponsiveNavbar"
 import Button from "@kiwicom/orbit-components/lib/Button"
 
 interface NavbarProps {
-    toggleLogin: any
+    toggleLogin: () => void
 }
 
 export default function Navbar({ toggleLogin }: NavbarProps) {
@@ -28,11 +28,7 @@ export default function Navbar({ toggleLogin }: NavbarProps) {
             }
         }
     }, [pathname, location])
-
-    function chooseTheme(event: any) {
-        console.log(event)
-    }
-
+    
     return (
         <div id="main">
             <nav id="myNavbar">
@@ -46,12 +42,16 @@ export default function Navbar({ toggleLogin }: NavbarProps) {
                 </div>
             </nav>
             <Button onClick={toggleLogin} circled={true}>Sign out / in (debug)</Button>
-            {/* <button className="" onClick={ResponsiveSidebar}>Themes</button> */}
+            {/* <button className="" onClick={ResponsiveSidebar}>Themes</button>
             <div id="sidebarId" className="sidebar">
-                <div className="sidebar--btn" onClick={chooseTheme}>Light</div>
-                <div className="sidebar--btn" onClick={chooseTheme}>Dark</div>
-            </div>
+            <div className="sidebar--btn" onClick={chooseTheme}>Light</div>
+            <div className="sidebar--btn" onClick={chooseTheme}>Dark</div>
+        </div> */}
             <Outlet />
         </div>
     )
 }
+
+// function chooseTheme(event: any) {
+//     console.log(event)
+// }

@@ -19,17 +19,21 @@ export const credentials = {
     }
 }
 
+// context s default inicijalnim stanjem
 export const MyContext = createContext(
     credentials.notLogged
 )
 
+export interface quizDataTypes {
+    category: string
+}
+
 export default function App () {
     const [login, setLogin] = useState(credentials.notLogged)
     const [startPageActive, setStartPageActive] = useState<boolean>(true)
-    const [quizData, setQuizData] = useState({
+    const [quizData, setQuizData] = useState<quizDataTypes>({
         category: ""
     })
-
     function toggleLogin() {
         setLogin(prevState => prevState.access === true ? credentials.notLogged : credentials.logged)
     }
@@ -52,7 +56,7 @@ export default function App () {
                 <Routes>
                     <Route path="/" element={<Navbar toggleLogin={toggleLogin} />}>
                         <Route index element={<LogoPage />} />
-                        <Route path="register" element={<RegistrationPage />} />
+                        <Route path="register" element={<RegistrationPage toggleLogin={toggleLogin} />} />
                         <Route path="login" element={<LoginPage toggleLogin={toggleLogin} />} />
                         <Route path="startpage" element={startpage} />
                         <Route path="addquestion" element={<AddQuestionPage />} />

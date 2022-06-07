@@ -2,7 +2,7 @@ import React from "react"
 import he from "he"                         // library za dekodiranje &quot; i sličnih gluposti
 import {useState, useEffect} from "react"
 
-export interface QuestionCardProps {
+interface QuestionCardProps {
     elements: {
         answerOne: string
         answerTwo: string
@@ -11,7 +11,7 @@ export interface QuestionCardProps {
         answer: string
         title: string
     }
-    setPoints: (arg0: (prevState: any) => any) => any
+    setPoints: (arg0: (prevState: number) => number) => void
     submitted: boolean
 }
 
@@ -32,7 +32,7 @@ export default function QuestionCard({ elements, setPoints, submitted }: Questio
         return answersArray.sort()
     }
 
-    function handleChange(event: { target: { value: any; name: any } }) {
+    function handleChange(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
         setAnswerData(prevAnswers => {
             return {
@@ -46,7 +46,7 @@ export default function QuestionCard({ elements, setPoints, submitted }: Questio
     let isCorrect = false
 
     useEffect(() => {
-        isCorrect && setPoints((prevState: number) => prevState + 1)
+        isCorrect && setPoints((prevState) => prevState + 1)
     }, [submitted])
     
     const showAnswers = answersArray.map (

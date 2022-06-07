@@ -5,7 +5,17 @@ import Text from "@kiwicom/orbit-components/lib/Text"
 import Heading from "@kiwicom/orbit-components/lib/Heading"
 import Button from "@kiwicom/orbit-components/lib/Button"
 
-export default function RegistrationPage() {
+interface RegistrationPageProps {
+    toggleLogin: () => void
+}
+
+export default function RegistrationPage({ toggleLogin }: RegistrationPageProps) {
+    interface formDataTypes {
+        userName: string,
+        email: string,
+        password: string,
+        confirmPassword: string
+    }
     const [formData, setFormData] = useState({
         userName: "",
         email: "",
@@ -23,7 +33,7 @@ export default function RegistrationPage() {
 
     function updateForm(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
-        setFormData((prevData: any) => {
+        setFormData((prevData: formDataTypes) => {
             return {
                 ...prevData,
                 [name]: value
@@ -64,6 +74,7 @@ export default function RegistrationPage() {
     
     useEffect(() => {
         if (localData.successfull) {
+            toggleLogin()
             navigate("/startpage", { replace: false })
         }
     }, [loadedSuccessfully])

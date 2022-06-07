@@ -1,17 +1,18 @@
 import * as React from "react"
 import Button from "@kiwicom/orbit-components/lib/Button"
+import { quizDataTypes } from "./App"
 
 interface StartPageProps {
-    setQuizData: (arg0: (prevData: any) => any) => void
-    quizData: { category: string | number | readonly string[] | undefined }
+    setQuizData: (arg0: (prevData: quizDataTypes) => quizDataTypes) => void
+    quizData: quizDataTypes
     startPageActive: boolean
     setStartPageActive: (arg0: boolean) => void
 }
 
 export default function StartPage({setQuizData, quizData, setStartPageActive}: StartPageProps) {
-    function handleDropdown(event: { target: { value: any; name: any } }) {
+    function handleDropdown(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
-        setQuizData((prevData: any) => {
+        setQuizData((prevData: quizDataTypes) => {
             return {
                 ...prevData,
                 [name]: value
