@@ -1,5 +1,3 @@
-# QuiZoki app
+# This is register-page branch
 
-### Your favorite trivia app
-
-Bask in it's glory
+was used only to add register and login page, but ended up being used for majority of commits. Actual branch is now master.
