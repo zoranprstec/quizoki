@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES2021",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "CommonJS",                                /* Specify what module code is generated. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "forceConsistentCasingInFileNames": true,           /* Ensure that casing is correct in imports. */
+    "sourceMap": true,          // allow sourcemap support
+    "strictNullChecks": true,   // enable strict null checks as a best practice
+    "allowJs": true,
+    "outDir": "./dist/",
+    "lib": ["dom", "es5", "es6", "DOM.Iterable"]
+  },
+  "include": [
+      "./src/",
+      "packages/orbit-components/**/*",
+      "packages/orbit-design-tokens/**/*",
+      "packages/eslint-plugin-orbit-components/**/*"
+  ],
+  "exclude": ["packages/orbit-components/cypress/**/*.test.*"]
+}

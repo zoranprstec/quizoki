@@ -1,20 +1,38 @@
+import React from "react"
 import he from "he"                         // library za dekodiranje &quot; i sličnih gluposti
 import {useState, useEffect} from "react"
 
-export default function QuestionCard(props) {
+interface QuestionCardProps {
+    elements: {
+        answerOne: string
+        answerTwo: string
+        answerThree: string
+        answerFour: string
+        answer: string
+        title: string
+    }
+    setPoints: (arg0: (prevState: number) => number) => void
+    submitted: boolean
+}
+
+export default function QuestionCard({ elements, setPoints, submitted }: QuestionCardProps) {
+    const { answerOne, answerTwo, answerThree, answerFour, answer, title } = elements
+    const incorrect_answers = [answerOne, answerTwo, answerThree, answerFour]
+    const correct_answer = answer
+    const question = title
     const [answerData, setAnswerData] = useState({
-        [props.question]: ""                            // question: answer (malo čudno, znam; to je ono selectano)
+        [question]: ""                            // question: answer (malo čudno, znam; to je ono selectano)
     })
     const [answersArray, setAnswersArray] = useState(() => initializeArray())
-    const {[props.question]: answer} = answerData
+    const {[question]: selectedAnswer} = answerData
     
     function initializeArray() {
-        const answersArray = props.incorrect_answers
-        answersArray.push(props.correct_answer)
+        const answersArray = incorrect_answers
+        answersArray.push(correct_answer)
         return answersArray.sort()
     }
 
-    function handleChange(event) {
+    function handleChange(event: { target: { value: string; name: string } }) {
         const {value, name} = event.target
         setAnswerData(prevAnswers => {
             return {
@@ -24,47 +42,49 @@ export default function QuestionCard(props) {
         })
     }
 
+
     let isCorrect = false
 
     useEffect(() => {
-        isCorrect && props.setPoints(prevState => prevState + 1)
-    }, [props.submitted])
+        isCorrect && setPoints((prevState) => prevState + 1)
+    }, [submitted])
     
     const showAnswers = answersArray.map (
         element => {
-            const selectedClass = answer === element ? "form-control-selected" : "form-control"
+            const selectedClass = selectedAnswer === element ? "form-control-selected" : "form-control"
             const correctClass = "form-control-correct"
             const incorrectClass = "form-control-incorrect"
             let submittedClass = ""
 
-            if (props.correct_answer === element) {
+            if (correct_answer === element) {
                 submittedClass = correctClass
-                if(answer === element) {
+                if(selectedAnswer === element) {
                     isCorrect = true
                 }
-            } else if (answer === element && props.correct_answer !== element) {
+            } else if (selectedAnswer === element && correct_answer !== element) {
                 submittedClass = incorrectClass
             } else {
                 submittedClass = "form-control"
             }
 
             return (
-                <label key={`label${element}`} className={props.submitted ? submittedClass : selectedClass}>
+                <label key={Math.random()} className={submitted ? submittedClass : selectedClass}>
                     <input
-                        disabled={props.submitted}
+                        disabled={submitted}
                         key={element}
                         type="radio"
                         id={element}
-                        name={props.question}
+                        name={question}
                         value={element}
-                        checked={answer === element}
+                        checked={selectedAnswer === element}
                         onChange={handleChange}
                     />
                     {he.decode(element)}
                 </label>
             )}
     )
-    const decodedQuestion = he.decode(props.question)
+
+    const decodedQuestion = he.decode(question)
 
     return (
         <section>
